@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>中间件资源管控平台</title>
+    <link rel="shortcut icon" href="/favicon.ico" type=image/x-icon>
+    {% if ctx.app.config.env !== "local" %}
+      {% include "webpackBundle.style.html" %}
+    {% else%}
+    {% endif %}
+    <script>
+      window.CTFO = window.CTFO || {}
+      window.CTFO.serverConfig = {{serverConfig | safe}}
+    </script>
+    {% if ctx.app.config.env !== "local" %}
+      <script src="/site/vue.min.js"></script>
+    {% else%}
+      <!--chrome中的dev-tool在min下会禁用-->
+      <script src="/site/vue.js"></script>
+    {% endif %}
+    <script src="/site/vue-router.min.js"></script>
+  </head>
+  <body>
+    <header></header>
+    <section style="height:100%">
+      <!-- 页面内容在这里 -->
+      <div id="app"></div>
+    </section>
+
+    {% if ctx.app.config.env !== "local" %}
+      {% include "webpackBundle.script.html" %}
+    {% else%}
+      <!--开发环境限定entry为app-->
+      {% set stats =  ctx.locals.webpackStats.toJson() %}
+      {% set appChunk = normalizeAssets(stats.entrypoints.app.assets)  %}
+      {% for item in appChunk%}
+        <script src="{{stats.publicPath + item}}"></script>
+      {% endfor%}
+    {% endif %}
+  </body>
+</html>

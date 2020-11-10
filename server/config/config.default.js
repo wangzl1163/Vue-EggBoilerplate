@@ -1,17 +1,6 @@
-// const matcher = require('matcher')
 const path = require('path')
 const os = require('os');
 const moment = require('moment')
-const getToken = (cookies, param) => {
-   let target = ''
-   cookies.split(';').forEach(v => {
-      let arrKeyVal = v.split('=')
-      if (arrKeyVal[0].trim() === param) {
-         target = decodeURIComponent(arrKeyVal[1])
-      }
-   })
-   return target
-}
 
 module.exports = appInfo => {
    const config = {}

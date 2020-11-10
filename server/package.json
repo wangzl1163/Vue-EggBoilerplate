@@ -1,42 +1,40 @@
 {
-  "name": "middleware-control-server",
-  "version": "0.0.9",
+  "name": "server",
+  "version": "1.0.0",
   "private": true,
-  "description": "middleware control server",
+  "description": "http proxy server",
   "repository": {
     "type": "git",
     "url": ""
   },
-  "license": "MIT",
-  "author": "devops",
+  "author": "wangzl1163",
   "scripts": {
     "autod": "autod",
     "cov": "egg-bin cov",
     "debug": "egg-bin debug --works=1",
     "dev": "egg-bin dev",
-    "start": "eggctl start --title=egg-server-middleware-control --workers=2",
-    "stop": "eggctl stop --title=egg-server-middleware-control",
+    "start": "eggctl start --title=egg-server-http-proxy",
+    "stop": "eggctl stop --title=egg-server-http-proxy",
     "test": "egg-bin test"
   },
   "dependencies": {
-    "egg": "^2.27.0",
+    "egg": "^2.29.1",
     "egg-history-api-fallback": "^2.0.1",
     "egg-http-proxy": "^1.0.1",
-    "egg-logrotator": "^3.0.5",
+    "egg-logrotator": "^3.1.0",
     "egg-multipart": "^2.10.3",
-    "egg-scripts": "^2.11.0",
-    "egg-view-nunjucks": "^2.2.0",
-    "lodash": "^4.17.15",
-    "matcher": "^2.0.0",
-    "webpack": "^4.39.1"
+    "egg-scripts": "^2.13.0",
+    "egg-view-nunjucks": "^2.2.0"
   },
   "devDependencies": {
     "acorn": "^6.2.1",
     "autod": "^3.0.1",
     "autod-egg": "^1.0.0",
-    "egg-bin": "^4.13.0",
-    "egg-mock": "^3.21.0",
-    "koa-webpack": "^5.2.4"
+    "egg-bin": "^4.15.0",
+    "egg-mock": "^4.0.1",
+    "koa-webpack": "^6.0.0",
+    "moment": "^2.29.1",
+    "webpack": "^4.44.2"
   },
   "engines": {
     "node": ">=8.9.0"

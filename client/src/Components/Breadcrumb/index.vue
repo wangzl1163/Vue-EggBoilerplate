@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import pathToRegexp from 'path-to-regexp'
+import * as pathToRegexp from 'path-to-regexp'
 
 export default {
    data() {
@@ -52,9 +52,14 @@ export default {
          return name.trim() === '首页'
       },
       pathCompile(path) {
-         const { params } = this.$route
+         const { query, params, path } = item
+
+         if(query) {
+            return { path, query: query }
+         }
+
          var toPath = pathToRegexp.compile(path)
-         return toPath(params)
+         return toPath(params || {})
       },
       handleLink(item) {
          const { redirect, path } = item

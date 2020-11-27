@@ -26,7 +26,14 @@ const webpackConfig = merge(baseWebpackConfig, {
       // you can customize output by editing /index.html
       // see https://github.com/ampedandwired/html-webpack-plugin
       new HtmlWebpackPlugin({
-         filename: path.resolve(__dirname, '../webpackBundle.html')
+         filename: path.resolve(__dirname, '../dist/webpackBundle.html'),
+         minify: {
+            removeComments: true, // 移除注释
+            collapseWhitespace: true, // 消除空白空间/空格
+            removeAttributeQuotes: true, // 移除属性的引号
+            collapseBooleanAttributes: true, // 简写Boolean值属性，例如：disabled="true" => disabled
+            removeScriptTypeAttributes: true // 去掉script标签的type属性
+          }
       }),
       // keep module.id stable when vendor modules does not change
       // new webpack.HashedModuleIdsPlugin(),
@@ -35,7 +42,7 @@ const webpackConfig = merge(baseWebpackConfig, {
       new CopyWebpackPlugin({
          patterns: [
             {
-               from: path.resolve(__dirname, '../src/Assets'),
+               from: path.resolve(__dirname, '../public'), // 文件夹不能为空，否则会报错
                to: 'static',
                globOptions: {
                   ignore: ['.*']

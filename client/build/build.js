@@ -18,9 +18,16 @@ rm(path.resolve(__dirname, '../../server/app/public'), err => {
 
    webpack(webpackConfig, (err, stats) => {
       spinner.stop()
+      
+      // 编译生成的HTML模板文件输出到dist文件夹
+      // 判断dist文件夹是否存在，不存在则创建
+      const builtDir = path.resolve(__dirname, '../dist/')
+      if (!fs.existsSync(builtDir)) {
+         fs.mkdirSync(builtDir)
+      }
 
       fs.writeFileSync(
-         path.resolve(__dirname, '../../server/config/webpack.stat.json'),
+         path.resolve(builtDir, 'webpack.stat.json'),
          JSON.stringify({
             hash: stats.hash,
             time: stats.time
@@ -44,9 +51,9 @@ rm(path.resolve(__dirname, '../../server/app/public'), err => {
          process.exit(1)
       }
 
-      console.log(chalk.cyan('  Build complete.\n'))
+      console.log(chalk.cyan('  ---- Build completed ---.\n'))
 
-      const $ = cheerio.load(fs.readFileSync('webpackBundle.html', 'utf8'))
+      const $ = cheerio.load(fs.readFileSync('./dist/webpackBundle.html', 'utf8'))
 
       fs.writeFileSync(
          path.resolve(__dirname, '../../server/app/view/webpackBundle.script.html'),

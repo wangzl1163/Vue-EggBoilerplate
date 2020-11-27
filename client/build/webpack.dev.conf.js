@@ -14,7 +14,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       new CopyWebpackPlugin({
          patterns: [
             {
-               from: path.resolve(__dirname, '../src/Assets'),
+               from: path.resolve(__dirname, '../public'),
                to: 'static',
                globOptions: {
                   ignore: ['.*']

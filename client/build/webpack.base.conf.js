@@ -69,7 +69,7 @@ module.exports = {
                name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
             }
          },
-         { // add sass
+         {
             test: /\.(sass|scss)$/,
             use: [
                'vue-style-loader',
@@ -102,13 +102,11 @@ module.exports = {
       })
    ],
    optimization: {
-      // extracting-boilerplate
       runtimeChunk: 'single',
       splitChunks: {
          cacheGroups: {
             vendors: {
                name: 'chunk-vendors',
-               // test: /[\\\/]node_modules[\\\/]/,
                test: /[\\/]node_modules[\\/]/,
                priority: -10,
                chunks: 'initial'

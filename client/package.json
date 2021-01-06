@@ -10,7 +10,7 @@
       "test:unit": "cross-env NODE_ENV=test jest"
    },
    "dependencies": {
-      "axios": "^0.21.0",
+      "axios": "^0.21.1",
       "core-js": "^3.7.0",
       "crypto-js": "^4.0.0",
       "echarts": "^4.9.0",

@@ -2,3 +2,7 @@ node_modules/
 */node_modules/
 */logs/
 */run/
+*/dist/
+server/app/public/
+server/app/view/webpackBundle.script.html
+server/app/view/webpackBundle.style.html

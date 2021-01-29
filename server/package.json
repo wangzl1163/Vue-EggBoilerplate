@@ -13,7 +13,7 @@
     "cov": "egg-bin cov",
     "debug": "egg-bin debug --works=1",
     "dev": "egg-bin dev",
-    "start": "eggctl start --title=egg-server-http-proxy",
+    "start": "eggctl start --title=egg-server-http-proxy --works=1",
     "stop": "eggctl stop --title=egg-server-http-proxy",
     "test": "egg-bin test"
   },

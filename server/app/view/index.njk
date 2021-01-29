@@ -3,7 +3,7 @@
    <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1.0">
-      <title>中间件资源管控平台</title>
+      <title>{{ctx.app.config.appSelf.title}}</title>
       <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
       {% if ctx.app.config.env !== "local" %}
          {% include "webpackBundle.style.html" %}
@@ -11,7 +11,7 @@
       <script>
          // 根据具体项目名来替换project
          window.project = window.project || {}
-         window.project.serverConfig = {{serverConfig | safe}}
+         window.project.serverConfig = {{ serverConfig | safe }}
       </script>
       {% if ctx.app.config.env !== "local" %}
          <script src="/site/vue.min.js"></script>

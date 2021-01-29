@@ -89,6 +89,7 @@ module.exports = appInfo => {
 
    // 项目特别配置
    config.appSelf = {
+      title: '中间件资源管控平台',
       version: process.env.VERSION || 'VERSION' + new Date().getTime(),
       deployTime: moment(new Date().getTime()).format('YYYY-MM-DD')
    }

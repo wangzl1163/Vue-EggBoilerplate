@@ -45,13 +45,15 @@ module.exports = appInfo => {
 
    // 后端配置
    config.backEnd = {
-      //  接口文档地址  http://172.20.60.23:8081/ctfo-devplatform-server/swagger-ui.html
+      // 如果环境变量中配置了地址，则使用环境变量配置的地址，否则使用指定的（写死的）地址
       url: process.env.GATEWAY_URL || 'http://172.20.60.23:8181',
       timeout: [15000, 30000],
       gitUrl: 'https://git.ctfo.com'
    }
 
-   console.log('process.env.GATEWAY_URL ==》' + process.env.GATEWAY_URL, '; 已配置的后端地址url是' + config.backEnd.url)
+   // process.env可以获取到node.js运行的当前环境的环境变量
+   console.log('环境变量配置的地址：' + process.env.GATEWAY_URL)
+   console.log('固定配置的地址：' + config.backEnd.url)
 
    config.login = {
       api: {
@@ -90,7 +92,6 @@ module.exports = appInfo => {
       version: process.env.VERSION || 'VERSION' + new Date().getTime(),
       deployTime: moment(new Date().getTime()).format('YYYY-MM-DD')
    }
-   console.log('process.env.VERSION ==》' + process.env.VERSION, '; UI已配置的VERSION是' + config.devops.version, '\n发布时间: ' + config.devops.deployTime)
 
    // 设置集群启动配置。
    config.cluster = {

@@ -5,7 +5,9 @@
  */
 module.exports = app => {
   const { router, controller } = app
+  
   router.get(`/`, controller.index.index)
+
   // 处理 login
   router.post('/api/node/ctfo-devplatform-server/sys/user/login', controller.login.login)
 

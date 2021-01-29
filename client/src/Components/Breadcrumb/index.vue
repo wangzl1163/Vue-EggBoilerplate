@@ -51,7 +51,7 @@ export default {
          }
          return name.trim() === '首页'
       },
-      pathCompile(path) {
+      pathCompile(item) {
          const { query, params, path } = item
 
          if(query) {
@@ -67,7 +67,7 @@ export default {
             this.$router.push(redirect)
             return
          }
-         this.$router.push(this.pathCompile(path))
+         this.$router.push(this.pathCompile(item))
       }
    }
 }

@@ -14,7 +14,7 @@ const webpackConfig = merge(baseWebpackConfig, {
    devtool: 'hidden-source-map',
    output: {
       filename: utils.assetsPath('js/[name].[contenthash].js'),
-      chunkFilename: utils.assetsPath('js/[name].[id].[contenthash].js')
+      chunkFilename: utils.assetsPath('js/[id].[contenthash].js')
    },
    plugins: [
       // Compress extracted CSS. We are using this plugin so that possible

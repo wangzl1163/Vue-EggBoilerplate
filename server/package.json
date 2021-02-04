@@ -12,8 +12,8 @@
     "autod": "autod",
     "cov": "egg-bin cov",
     "debug": "egg-bin debug --works=1",
-    "dev": "egg-bin dev",
-    "start": "eggctl start --title=egg-server-http-proxy --works=1",
+    "dev": "egg-bin dev --port=9001",
+    "start": "eggctl start --title=egg-server-http-proxy",
     "stop": "eggctl stop --title=egg-server-http-proxy",
     "test": "egg-bin test"
   },

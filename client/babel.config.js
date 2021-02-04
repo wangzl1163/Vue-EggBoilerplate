@@ -5,10 +5,7 @@ module.exports = {
        {
          modules: false,
          useBuiltIns: 'entry',
-         corejs: 3,
-         targets: {
-           browsers: ['defaults', 'ie >= 9']
-         }
+         corejs: { version: 3, proposals: true }
        }
      ],
      '@vue/babel-preset-jsx'
@@ -17,7 +14,7 @@ module.exports = {
      '@babel/plugin-transform-runtime',
      '@babel/plugin-syntax-dynamic-import',
      '@babel/plugin-syntax-import-meta',
-     'lodash'
+     '@babel/plugin-syntax-jsx'
    ],
    env: {
      test: {

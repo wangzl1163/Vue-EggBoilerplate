@@ -103,8 +103,8 @@
    },
    "browserslist": [
       "> 0.01% in CN",
-      "Firefox >= 30",
-      "Chrome >= 40",
+      "Firefox >= 34",
+      "Chrome >= 49",
       "not ie <= 8",
       "Edge >= 12",
       "not dead"

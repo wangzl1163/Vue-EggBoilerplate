@@ -1,40 +1,31 @@
-// MySQL
+// 主机
 <template>
    <el-card>
       <div slot="header">
-         <span>集群列表</span>
-         <el-button style="float: right;" type="primary" size="mini" @click="visible = true">创建集群</el-button>
+         <span>主机列表</span>
+         <el-button style="float: right;" type="primary" size="mini" @click="visible = true">新建主机</el-button>
       </div>
       <Table :columns="columns" :tableData="tableData" :pageIndex.sync="currentPage" :pageSize.sync="pageSize"
          :total="total" @pageSizeChange="pageSizeChange" @pageChange="pageChange"></Table>
 
-      <Dialog title="创建集群" :visible.sync="visible">
-         <div class="cluster-dialog">
+      <Dialog title="新建主机" width="700px" v-model:visible="visible">
+         <div class="host-dialog">
             <el-form label-width="100px">
                <div class="info basic-info">
                   <div class="info--header">
                      <span></span><span>基础信息</span>
                   </div>
                   <div>
-                     <el-form-item label="集群名称：" prop="">
+                     <el-form-item label="主机：" prop="">
                         <el-input placeholder="请输入"></el-input>
                      </el-form-item>
-                     <el-form-item label="描述：" prop="">
-                        <el-input type="textarea" placeholder="请输入"></el-input>
+                     <el-form-item label="登录名：" prop="">
+                        <el-input placeholder="请输入"></el-input>
                      </el-form-item>
-                     <el-form-item label="集群类型：" prop="">
-                        <el-select value="" style="width:100%;">
-                           <el-option v-for="option in [1,2,3]" :key="option" :label="option" :value="option">
-                           </el-option>
-                        </el-select>
+                     <el-form-item label="密码：" prop="">
+                        <el-input placeholder="请输入"></el-input>
                      </el-form-item>
-                     <el-form-item label="主机IP：" prop="">
-                        <el-select value="" style="width:100%;">
-                           <el-option v-for="option in [1,2,3]" :key="option" :label="option" :value="option">
-                           </el-option>
-                        </el-select>
-                     </el-form-item>
-                     <el-form-item label="备机IP：" prop="">
+                     <el-form-item label="可部署应用：" prop="">
                         <el-select value="" style="width:100%;">
                            <el-option v-for="option in [1,2,3]" :key="option" :label="option" :value="option">
                            </el-option>
@@ -42,7 +33,40 @@
                      </el-form-item>
                   </div>
                </div>
-               <ConfigParams :versions="[1,2,3]"></ConfigParams>
+               <div class="info config-info">
+                  <div class="info--header">
+                     <span></span><span>配置信息</span>
+                  </div>
+                  <div>
+                     <el-row>
+                        <el-col :span="8">
+                           <el-form-item label="cpu：" prop="">
+                              <el-select value="" style="width:100%;">
+                                 <el-option v-for="option in [1,2,3]" :key="option" :label="option" :value="option">
+                                 </el-option>
+                              </el-select>
+                           </el-form-item>
+                        </el-col>
+
+                        <el-col :span="8">
+                           <el-form-item label="内存：" prop="">
+                              <el-select value="" style="width:100%;">
+                                 <el-option v-for="option in [1,2,3]" :key="option" :label="option" :value="option">
+                                 </el-option>
+                              </el-select>
+                           </el-form-item>
+                        </el-col>
+                        <el-col :span="8">
+                           <el-form-item label="磁盘：" prop="">
+                              <el-select value="" style="width:100%;">
+                                 <el-option v-for="option in [1,2,3]" :key="option" :label="option" :value="option">
+                                 </el-option>
+                              </el-select>
+                           </el-form-item>
+                        </el-col>
+                     </el-row>
+                  </div>
+               </div>
             </el-form>
          </div>
       </Dialog>
@@ -92,7 +116,8 @@ export default {
             },
             {
                title: '操作',
-               render: (h) => {
+               // render中的this是绑定的当前行组件的this，使用箭头函数来绑定页面组件的this
+               render: (h, scope) => {
                   return (
                      <div>
                         <el-button type="text" onClick={
@@ -122,13 +147,12 @@ export default {
          currentPage: 1,
          total: 100,
          pageSize: 10,
-         visible: false
+         visible: false,
+         currentRow: null
       }
    },
 
-   components: {
-      ConfigParams: () => import('../Components/ConfigParams')
-   },
+   components: {},
 
    computed: {},
 
@@ -145,8 +169,25 @@ export default {
 
 </script>
 <style lang='less' scoped>
-.cluster-dialog {
-   box-sizing: border-box;
-   padding: 0 20px 0 10px;
+.host-dialog {
+}
+.info {
+   .info--header {
+      display: flex;
+      align-items: center;
+      height: 20px;
+      & > span:first-of-type {
+         display: inline-flex;
+         margin-right: 6px;
+         width: 4px;
+         height: 12px;
+         background-color: green;
+      }
+
+      & > span:last-of-type {
+         display: inline-flex;
+         color: green;
+      }
+   }
 }
 </style>

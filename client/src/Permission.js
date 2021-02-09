@@ -1,6 +1,6 @@
 import router from './Router'
 import loadingBar from './Plugins/LoadingBar/Index'
-import { Message } from 'element-ui'
+import { ElMessage } from 'element-plus'
 import store from './Store'
 
 const whiteList = ['/login', '/register']
@@ -30,7 +30,7 @@ router.beforeEach((to, from, next) => {
             })
          }).catch(err => {
             store.dispatch('FedLogOut').then(() => {
-               Message.error(err.message || err)
+               ElMessage.error(err.message || err)
                next({ path: '/' })
             })
          })
@@ -44,7 +44,7 @@ router.beforeEach((to, from, next) => {
          return
       }
 
-      Message.error('您还没有登录，即将跳转到登录页面')
+      ElMessage.error('您还没有登录，即将跳转到登录页面')
       setTimeout(() => {
          next('/login')
       }, 3000)

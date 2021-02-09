@@ -1,5 +1,4 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import { createStore } from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
 import { encryption, decryption } from '../Utils/AES'
 
@@ -10,9 +9,7 @@ import { permission } from './Modules/Permission'
 import { tagsView } from './Modules/TagsView'
 import { settings } from './Modules/Settings'
 
-Vue.use(Vuex)
-
-export default new Vuex.Store({
+export default createStore({
    strict: process.env.NODE_ENV !== 'production',
    plugins: [
       createPersistedState({

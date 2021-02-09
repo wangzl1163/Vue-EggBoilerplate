@@ -1,24 +1,24 @@
-export default {
-   name: 'TableColumnSlotRender',
-   functional: true,
-   props: {
-      row: Object,
-      render: Function,
-      index: Number,
-      column: {
-         type: Object,
-         default: null
-      }
-   },
-   render: (h, ctx) => {
-      const params = {
-         row: ctx.props.row,
-         index: ctx.props.index
-      }
+import { h } from 'vue';
 
-      if (ctx.props.column) params.column = ctx.props.column
+const slotRender = function (props, ctx) {
+   const params = {
+      row: props.row,
+      index: props.index,
+      column: props.column
+   }
 
-      const render = ctx.props.render.bind(ctx)
-      return render(h, params)
+   const render = props.render.bind(ctx)
+   return render(h, params)
+}
+
+slotRender.props = {
+   row: Object,
+   render: Function,
+   index: Number,
+   column: {
+      type: Object,
+      default: () => ({})
    }
 }
+
+export default slotRender

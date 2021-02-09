@@ -1,5 +1,5 @@
 import loadingBar from '@/Plugins/LoadingBar/Index'
-import { Message } from 'element-ui'
+import { ElMessage } from 'element-plus'
 const errorMsgs = {
    400: {
       msg: '错误的请求',
@@ -112,18 +112,18 @@ const exception = function (errorCode, errorMsg, isServiceError = true) {
      * 如果错误代码存在并且1级优先
      */
       if (error.firstLevel && error.msg) {
-         Message.error(error.msg)
+         ElMessage.error(error.msg)
       } else if (!error.firstLevel && errorMsg) {
-         Message.error(errorMsg || error.msg)
+         ElMessage.error(errorMsg || error.msg)
       }
       if (error.callback) {
          error.callback()
       }
    } else {
       if (errorMsg) {
-         Message.error(errorMsg)
+         ElMessage.error(errorMsg)
       } else {
-         Message.error('未知错误')
+         ElMessage.error('未知错误')
       }
    }
 }

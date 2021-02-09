@@ -14,11 +14,12 @@
          window.project.serverConfig = {{ serverConfig | safe }}
       </script>
       {% if ctx.app.config.env !== "local" %}
-         <script src="/site/vue.min.js"></script>
+         <script src="/site/vue.global.prod.js"></script>
+         <script src="/site/vue-router.global.prod.js"></script>
          {% else%}
-         <script src="/site/vue.js"></script>
+         <script src="/site/vue.global.js"></script>
+         <script src="/site/vue-router.global.js"></script>
       {% endif %}
-      <script src="/site/vue-router.min.js"></script>
    </head>
    <body>
       <header></header>

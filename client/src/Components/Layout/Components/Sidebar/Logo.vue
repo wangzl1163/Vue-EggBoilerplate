@@ -26,7 +26,7 @@ export default {
    },
    data () {
       return {
-         title: '中间件资源管控系统',
+         title: window.project.serverConfig.appSelf.title,
          logo: logoImg
       }
    }

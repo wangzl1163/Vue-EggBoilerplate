@@ -80,56 +80,14 @@ export const constantRoutes = [
    {
       path: '/',
       level: 1,
-      redirect: 'host',
+      redirect: 'home',
       component: () => import('@/Components/Layout'),
       children: [
          {
-            path: 'host',
-            component: () => import(/* webpackChunkName: "home" */ '@/Views/Host'),
-            name: '主机',
-            meta: { title: '主机', icon: 'dashboard', noCache: true, affix: true }
-         }
-      ]
-   },
-   {
-      path: '/mysql',
-      level: 1,
-      redirect: '/mysql/list',
-      component: () => import('@/Components/Layout'),
-      children: [
-         {
-            path: 'list',
-            component: () => import(/* webpackChunkName: "mysql" */ '@/Views/MySQL'),
-            name: 'mysql',
-            meta: { title: 'MySQL', icon: 'dashboard', noCache: true }
-         }
-      ]
-   },
-   {
-      path: '/redis',
-      level: 1,
-      redirect: '/redis/list',
-      component: () => import('@/Components/Layout'),
-      children: [
-         {
-            path: 'list',
-            component: () => import(/* webpackChunkName: "mysql" */ '@/Views/Redis'),
-            name: 'redis',
-            meta: { title: 'Redis', icon: 'dashboard', noCache: true }
-         }
-      ]
-   },
-   {
-      path: '/kafka',
-      level: 1,
-      redirect: '/kafka/list',
-      component: () => import('@/Components/Layout'),
-      children: [
-         {
-            path: 'list',
-            component: () => import(/* webpackChunkName: "kafka" */ '@/Views/Kafka'),
-            name: 'kafka',
-            meta: { title: 'Kafka', icon: 'dashboard', noCache: true }
+            path: 'home',
+            component: () => import(/* webpackChunkName: "home" */ '@/Views/Home'),
+            name: '首页',
+            meta: { title: '首页', icon: 'dashboard', noCache: true, affix: true }
          }
       ]
    },
@@ -165,7 +123,8 @@ export const constantRoutes = [
       }
    },
    {
-      path: '*',
+      path: '/:pathMatch(.*)*',
+      name: 'not-found',
       hidden: true,
       component: () => import(/* webpackChunkName: "page404" */ '@/Views/SystemPages/404.vue'),
       meta: {

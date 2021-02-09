@@ -2,7 +2,7 @@
    <div>
       <el-table :row-class-name="rowClassName" :border="border" :data="tableData"
          @sort-change="orderMethod" :show-header="showHeader" :height="height">
-         <template v-for="(item) in columns">
+         <template v-for="item in columns">
             <template v-if="item.render">
                <el-table-column v-if="item.renderHeader"
                   :prop="item.key"
@@ -11,7 +11,7 @@
                   :width="item.width"
                   :render-header="item.renderHeader"
                   :class-name="item.className">
-                  <template slot-scope="params">
+                  <template v-slot:default="params">
                      <v-slot :render="item.render" :column="item" :row="params.row" :index="params.$index"></v-slot>
                   </template>
                </el-table-column>
@@ -24,7 +24,7 @@
                   :align="item.align"
                   :width="item.width"
                   :class-name="item.className">
-                  <template slot-scope="params">
+                  <template v-slot:default="params">
                      <v-slot :render="item.render" :column="item" :row="params.row" :index="params.$index"></v-slot>
                   </template>
                </el-table-column>

@@ -1,25 +1,24 @@
 <template>
    <div>
       <el-dialog
-         :id="id"
+         v-model="visible"
          :title="title"
          :append-to-body="true"
          :width="width"
-         :visible="visible"
          :close-on-click-modal="maskCloseable"
          :show-close="showClose"
          @close="cancel"
          @open="open">
-         <template slot="title">
+         <template #title>
             <slot name="title"></slot>
          </template>
 
          <slot></slot>
 
-         <template slot="footer" v-if="footerOn">
+         <template #footer v-if="footerOn">
             <slot name="footer"></slot>
          </template>
-         <template slot="footer" v-else>
+         <template #footer v-else>
             <el-button v-if="showCancel" @click="cancel">{{cancelText}}</el-button>
             <el-button type="primary" @click="confirm">{{confirmText}}</el-button>
          </template>
@@ -29,10 +28,6 @@
 <script>
 export default {
    props: {
-      id: {
-         type: String,
-         default: Date.now().toString()
-      },
       visible: {
          type: Boolean
       },
@@ -68,6 +63,7 @@ export default {
          default: true
       }
    },
+   emits: ['update:visible', 'open', 'cancel', 'confirm'],
    data() {
       return {}
    },

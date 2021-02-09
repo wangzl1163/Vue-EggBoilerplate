@@ -22,7 +22,7 @@ export default {
    mounted () {
       this.scrollWrapper.addEventListener('scroll', this.emitScroll, true)
    },
-   beforeDestroy () {
+   beforeUnmount () {
       this.scrollWrapper.removeEventListener('scroll', this.emitScroll)
    },
    methods: {
@@ -83,10 +83,10 @@ export default {
    overflow: hidden;
    width: 100%;
 
-   /deep/ .el-scrollbar__bar {
+   :deep(.el-scrollbar__bar) {
       bottom: 0px;
    }
-   /deep/ .el-scrollbar__wrap {
+   :deep(.el-scrollbar__wrap) {
       height: 49px;
    }
 }

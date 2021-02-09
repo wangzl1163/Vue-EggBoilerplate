@@ -1,6 +1,7 @@
 const path = require('path')
 const os = require('os');
 const moment = require('moment')
+const fs = require('fs')
 
 module.exports = appInfo => {
    const config = {}
@@ -44,7 +45,7 @@ module.exports = appInfo => {
 
    // 项目特别配置
    config.appSelf = {
-      title: '中间件资源管控平台',
+      title: '管理系统',
       version: process.env.VERSION || 'VERSION' + new Date().getTime(),
       deployTime: moment(new Date().getTime()).format('YYYY-MM-DD')
    }
@@ -96,10 +97,11 @@ module.exports = appInfo => {
 
    // 设置资源文件
    config.siteFile = {
-      '/favicon.ico': require('fs').readFileSync(path.join(__dirname, '../favicon.ico')),
-      '/site/vue.min.js': require('fs').readFileSync(path.join(__dirname, '../siteFile/vue.min.js')),
-      '/site/vue.js': require('fs').readFileSync(path.join(__dirname, '../siteFile/vue.js')),
-      '/site/vue-router.min.js': require('fs').readFileSync(path.join(__dirname, '../siteFile/vue-router.min.js'))
+      '/favicon.ico': fs.readFileSync(path.join(__dirname, '../favicon.ico')),
+      '/site/vue.global.prod.js': fs.readFileSync(path.join(__dirname, '../siteFile/vue.global.prod.js')),
+      '/site/vue.global.js': fs.readFileSync(path.join(__dirname, '../siteFile/vue.global.js')),
+      '/site/vue-router.global.js': fs.readFileSync(path.join(__dirname, '../siteFile/vue-router.global.js')),
+      '/site/vue-router.global.prod.js': fs.readFileSync(path.join(__dirname, '../siteFile/vue-router.global.prod.js'))
    }
 
    return config

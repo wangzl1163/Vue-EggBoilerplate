@@ -44,12 +44,9 @@ module.exports = {
          {
             test: /\.(le|c)ss$/,
             use: [
-               // 目前几个问题：
-               // 1. 目前对于css提取时，会有个空的JS文件，这个webpack在处理，目前先加载个也不是大问题
-               // https://github.com/webpack/webpack/issues/1967
-               // 2. css提取时，希望只提取出一个css文件，等待插件支持。 https://github.com/webpack-contrib/mini-css-extract-plugin/pull/348
                devMode ? 'vue-style-loader' : MiniCssExtractPlugin.loader,
                'css-loader',
+               'postcss-loader',
                'less-loader'
             ]
          },

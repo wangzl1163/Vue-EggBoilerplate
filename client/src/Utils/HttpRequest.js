@@ -9,7 +9,7 @@ let hideError = false
 const http = axios.create({
    baseURL: process.env.VUE_APP_BASE_API, // api的base_url
    timeout: 60000, // 请求超时时间
-   'x-csrf-token': '123'
+   'x-csrf-token': getCookie('csrfToken')
 })
 
 // 请求拦截器
@@ -84,6 +84,12 @@ http.interceptors.response.use(response => {
 
    return Promise.reject(errorData)
 })
+
+function getCookie(name){
+   var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)");
+   if(arr=document.cookie.match(reg)) return unescape(arr[2]);
+   else return null;
+}
 
 /**
  * http请求

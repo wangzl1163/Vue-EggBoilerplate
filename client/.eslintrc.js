@@ -24,5 +24,6 @@ module.exports = {
     clearSelection: {
       jsx: true
     }
-  }
+  },
+  root: true
 }

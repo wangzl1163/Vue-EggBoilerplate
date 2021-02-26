@@ -20,6 +20,9 @@ module.exports = {
     browser: true
   },
   parserOptions: {
-    parser: 'babel-eslint'
+    parser: 'babel-eslint',
+    clearSelection: {
+      jsx: true
+    }
   }
 }

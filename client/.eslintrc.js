@@ -17,7 +17,8 @@ module.exports = {
     'vue/singleline-html-element-content-newline':'off'
   },
   env: {
-    browser: true
+    browser: true,
+    node: true
   },
   parserOptions: {
     parser: 'babel-eslint',

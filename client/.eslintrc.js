@@ -2,7 +2,7 @@
 
 module.exports = {
   extends: ['plugin:vue/recommended', 'standard', 'prettier', 'prettier/standard'],
-  plugins: ['vue', 'prettier', 'standard'],
+  plugins: ['prettier', 'standard'],
   rules: {
     'prettier/prettier': ['error', {"tabWidth": 3}],
     'vue/no-async-in-computed-properties': 'off',

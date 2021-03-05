@@ -21,7 +21,7 @@ module.exports = {
       'vue-router': 'VueRouter'
    },
    resolve: {
-      extensions: ['.js', '.vue', '.json'],
+      extensions: ['.js', '.vue', '.json', '.ts'],
       alias: {
          '@views': path.resolve(__dirname, '../src/views'),
          '@': path.resolve(__dirname, '../src')
@@ -30,7 +30,7 @@ module.exports = {
    module: {
       rules: [
          {
-            test: /\.tsx?$/,
+            test: /\.tsx?$/, // 包含：*.ts,*.tsx
             loader: 'ts-loader',
             options: {
                appendTsSuffixTo: [/\.vue$/],

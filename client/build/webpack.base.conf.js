@@ -21,7 +21,7 @@ module.exports = {
       'vue-router': 'VueRouter'
    },
    resolve: {
-      extensions: ['.js', '.vue', '.json', '.ts'],
+      extensions: ['.js', '.vue', '.json', '.ts', '.tsx'],
       alias: {
          '@views': path.resolve(__dirname, '../src/views'),
          '@': path.resolve(__dirname, '../src')

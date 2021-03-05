@@ -8,7 +8,7 @@ const devMode = process.env.NODE_ENV !== 'production'
 module.exports = {
    context: path.resolve(__dirname, '../'),
    entry: {
-      app: ['./src/main.js']
+      app: ['./src/main.ts']
    },
    output: {
       path: path.resolve(__dirname, '../../server/app/public'),

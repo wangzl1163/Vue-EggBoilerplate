@@ -5,7 +5,7 @@
 import store from '@/Store'
 
 export default {
-   inserted (el, binding, vnode) {
+   mounted (el: any, binding: any) {
       const { value } = binding
       const superAdmin = 'admin'
       const roles = store.getters && store.getters.roles
@@ -13,7 +13,7 @@ export default {
       if (value && value instanceof Array && value.length > 0) {
          const roleFlag = value
 
-         const hasRole = roles.some(role => {
+         const hasRole = roles.some((role:string) => {
             return superAdmin === role || roleFlag.includes(role)
          })
 

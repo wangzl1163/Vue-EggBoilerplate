@@ -1,4 +1,5 @@
 import CryptoJS from 'crypto-js/crypto-js'
+
 const key = CryptoJS.enc.Utf8.parse(CryptoJS.MD5(process.env.AESKEY).toString())
 const iv = CryptoJS.enc.Utf8.parse(
    CryptoJS.MD5(process.env.AESIV)
@@ -10,7 +11,8 @@ const options = {
    mode: CryptoJS.mode.CBC,
    padding: CryptoJS.pad.ZeroPadding
 }
-export function encryption (obj) {
+
+export function encryption (obj: any): string {
    try {
       const aesResult = CryptoJS.AES.encrypt(JSON.stringify(obj), key, options).toString()
       return aesResult
@@ -18,7 +20,8 @@ export function encryption (obj) {
       return ''
    }
 }
-export function decryption (str) {
+
+export function decryption (str: string | null): any {
    try {
       const decryptResult = CryptoJS.AES.decrypt(str, key, options)
       const resData = decryptResult.toString(CryptoJS.enc.Utf8) // 因为解析出来是一个字符串，又转换成为字符串，所以需要反序列化两次

@@ -1,18 +1,18 @@
 import request from '@/Utils/HttpRequest'
 
-function login (params) {
+function login (params: object): Promise<any> {
    return request.$post('', params)
 }
 
-function logout (params) {
-
+function logout (): Promise<any> {
+   return request.$get('')
 }
 
-function getUserInfo (params) {
+function getUserInfo (): Promise<any> {
    return request.$post('', params)
 }
 
-function getCodeImg (params) {
+function getCodeImg (params: object): Promise<any> {
    return request.$get('')
 }
 

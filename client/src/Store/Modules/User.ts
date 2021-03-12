@@ -1,7 +1,9 @@
+import { Dispatch, Commit, Module } from 'vuex';
 import { SET_USER_NAME, SET_USER_AVATAR, SET_ROLES, SET_PERMISSIONS } from '../MutationTypes'
 import { login, logout, getUserInfo } from '@/Apis/Login'
+import { IUser, IState } from './UserInterface';
 
-const user = {
+const user: IUser = {
    state: {
       name: '',
       avatar: '',
@@ -10,32 +12,37 @@ const user = {
    },
 
    mutations: {
-      [SET_USER_NAME]: (state, name) => {
+      [SET_USER_NAME]: (state, name: string): void => {
          state.name = name
       },
-      [SET_USER_AVATAR]: (state, avatar) => {
+      [SET_USER_AVATAR]: (state, avatar: string): void => {
          state.avatar = avatar
       },
-      [SET_ROLES]: (state, roles) => {
+      [SET_ROLES]: (state, roles: Array<string>): void => {
          state.roles = roles
       },
-      [SET_PERMISSIONS]: (state, permissions) => {
+      [SET_PERMISSIONS]: (state, permissions: Array<string>): void => {
          state.permissions = permissions
       }
    },
 
    actions: {
       // 登录
-      Login ({ dispatch }, userInfo) {
+      Login ({ dispatch }: {dispatch: Dispatch}, userInfo: {
+         username: string,
+         password: string,
+         code: string | number,
+         uuid: string
+      }) {
          const username = userInfo.username.trim()
          const password = userInfo.password
          const code = userInfo.code
          const uuid = userInfo.uuid
 
          return new Promise((resolve, reject) => {
-            login(username, password, code, uuid).then(res => {
+            login({username, password, code, uuid}).then(res => {
                dispatch('storeToken', res.token)
-               resolve()
+               resolve(res)
             }).catch(error => {
                reject(error)
             })
@@ -43,9 +50,9 @@ const user = {
       },
 
       // 获取用户信息
-      GetUserInfo ({ commit, state }) {
+      GetUserInfo ({ commit }: { commit: Commit}) {
          return new Promise((resolve, reject) => {
-            getUserInfo(state.token).then(res => {
+            getUserInfo().then(res => {
                const user = res.user
                const avatar = user.avatar === '' ? require('@/Assets/Images/Profile.png') : process.env.VUE_APP_BASE_API + user.avatar
 
@@ -66,13 +73,13 @@ const user = {
       },
 
       // 退出系统
-      LogOut ({ state, commit, dispatch }) {
+      LogOut ({ commit, dispatch }: { commit: Commit, dispatch: Dispatch }) {
          return new Promise((resolve, reject) => {
-            logout(state.token).then(() => {
+            logout().then(() => {
                dispatch('storeToken', '')
                commit(SET_ROLES, [])
                commit(SET_PERMISSIONS, [])
-               resolve()
+               resolve(undefined)
             }).catch(error => {
                reject(error)
             })
@@ -80,16 +87,16 @@ const user = {
       },
 
       // 前端 登出
-      FedLogOut ({ dispatch }) {
-         return new Promise(resolve => {
+      FedLogOut ({ dispatch }: {dispatch: Dispatch}) {
+         return new Promise((resolve) => {
             dispatch('storeToken', '')
-            resolve()
+            resolve(undefined)
          })
       }
    },
 
    getters: {
-      avatar: state => state.avatar
+      avatar: (state): string => state.avatar
    }
 }
 

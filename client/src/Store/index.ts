@@ -9,15 +9,16 @@ import { permission } from './Modules/Permission'
 import { tagsView } from './Modules/TagsView'
 import { settings } from './Modules/Settings'
 
+
 export default createStore({
    strict: process.env.NODE_ENV !== 'production',
    plugins: [
       createPersistedState({
          key: 'middleware-control',
          storage: {
-            setItem: (key, value) => window.sessionStorage.setItem(key, encryption(value)),
-            getItem: (key) => decryption(window.sessionStorage.getItem(key)),
-            removeItem: (key) => window.sessionStorage.removeItem(key)
+            setItem: (key: string, value: any): void => window.sessionStorage.setItem(key, encryption(value)),
+            getItem: (key: string): object => decryption(window.sessionStorage.getItem(key)),
+            removeItem: (key: string): void => window.sessionStorage.removeItem(key)
          }
       })
    ],

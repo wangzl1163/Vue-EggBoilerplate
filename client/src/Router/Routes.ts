@@ -67,8 +67,20 @@
 //    ]
 // }
 
+import { RouteRecordRaw } from 'vue-router';
+
+interface RouteInterface {
+   path: string,
+   name?: string,
+   hidden?: boolean,
+   redirect?: string,
+   component?: Function,
+   meta?: object,
+   children?: any[]
+}
+
 // 公共路由
-export const constantRoutes = [
+export const constantRoutes: any[] = [
    {
       path: '/login',
       hidden: true,
@@ -134,4 +146,4 @@ export const constantRoutes = [
 ]
 
 // moduleCode 与 页面组件的映射
-export const mapComponents = []
+export const mapComponents: {[x:string]:string} = {}

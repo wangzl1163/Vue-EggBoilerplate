@@ -2,8 +2,10 @@ import { SET_ROUTES } from '../MutationTypes'
 import { constantRoutes, mapComponents } from '@/Router/Routes'
 import getRouters from '@/Apis/Menu'
 import layout from '@/Components/Layout/index'
+import { IPermission, IState } from './PermissionInterface';
+import { Module } from 'vuex';
 
-const permission = {
+const permission: IPermission = {
    state: {
       routes: [],
       addRoutes: []
@@ -19,7 +21,7 @@ const permission = {
       GenerateRoutes ({ commit }) {
          return new Promise(resolve => {
             // 向后端请求路由数据
-            getRouters().then(res => {
+            getRouters().then((res: any) => {
                const accessedRoutes = filterAsyncRouter(res.data)
                accessedRoutes.push({ path: '*', redirect: '/404', hidden: true })
                commit(SET_ROUTES, accessedRoutes)
@@ -35,7 +37,7 @@ const permission = {
 }
 
 // 遍历后台传来的路由字符串，转换为组件对象
-function filterAsyncRouter (asyncRouterMap) {
+function filterAsyncRouter (asyncRouterMap: any[]) {
    return asyncRouterMap.filter(route => {
       if (route.moduleCode) {
          if (route.level === 1) {
@@ -53,7 +55,7 @@ function filterAsyncRouter (asyncRouterMap) {
    })
 }
 
-export const loadView = (moduleCode) => { // 路由懒加载
+export const loadView = (moduleCode: string) => { // 路由懒加载
    return mapComponents[moduleCode]
 }
 

@@ -5,7 +5,7 @@
 import store from '@/Store'
 
 export default {
-   inserted (el, binding, vnode) {
+   mounted (el: any, binding: any) {
       const { value } = binding
       const allPermission = '*:*:*'
       const permissions = store.getters && store.getters.permissions
@@ -13,7 +13,7 @@ export default {
       if (value && value instanceof Array && value.length > 0) {
          const permissionFlag = value
 
-         const hasPermissions = permissions.some(permission => {
+         const hasPermissions = permissions.some((permission: string) => {
             return allPermission === permission || permissionFlag.includes(permission)
          })
 

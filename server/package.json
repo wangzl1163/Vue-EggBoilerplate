@@ -34,7 +34,7 @@
     "egg-mock": "^4.0.1",
     "koa-webpack": "^6.0.0",
     "moment": "^2.29.1",
-    "webpack": "^4.44.2"
+    "webpack": "^4.46.0"
   },
   "engines": {
     "node": ">=8.9.0"

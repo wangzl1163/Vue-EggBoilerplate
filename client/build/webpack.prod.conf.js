@@ -1,6 +1,7 @@
 'use strict'
 const path = require('path')
 const utils = require('./utils')
+const webpack = require('webpack')
 const { merge } = require('webpack-merge')
 const baseWebpackConfig = require('./webpack.base.conf')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
@@ -17,15 +18,9 @@ const webpackConfig = merge(baseWebpackConfig, {
       chunkFilename: utils.assetsPath('js/[id].[contenthash].js')
    },
    plugins: [
-      // Compress extracted CSS. We are using this plugin so that possible
-      // duplicated CSS from different components can be deduped.
-      new OptimizeCSSPlugin({
-         cssProcessorOptions: { safe: true, map: { inline: false } }
-      }),
-      // generate dist index.html with correct asset hash for caching.
-      // you can customize output by editing /index.html
-      // see https://github.com/ampedandwired/html-webpack-plugin
       new HtmlWebpackPlugin({
+         title: '', // html文档中的title
+         // 使用path.resolve，因为插件无法解析相对路径
          filename: path.resolve(__dirname, '../dist/webpackBundle.html'),
          minify: {
             removeComments: true, // 移除注释
@@ -35,10 +30,13 @@ const webpackConfig = merge(baseWebpackConfig, {
             removeScriptTypeAttributes: true // 去掉script标签的type属性
           }
       }),
+      new OptimizeCSSPlugin({
+         cssProcessorOptions: { safe: true, map: { inline: false } }
+      }),
       // keep module.id stable when vendor modules does not change
-      // new webpack.HashedModuleIdsPlugin(),
-      // enable scope hoisting
-      // copy custom static assets
+      new webpack.HashedModuleIdsPlugin({
+         hashDigestLength: 20
+      }),
       new CopyWebpackPlugin({
          patterns: [
             {

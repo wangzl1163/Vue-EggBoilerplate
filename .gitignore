@@ -6,3 +6,4 @@ node_modules/
 server/app/public/
 server/app/view/webpackBundle.script.html
 server/app/view/webpackBundle.style.html
+client/stats/

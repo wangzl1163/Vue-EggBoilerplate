@@ -6,7 +6,6 @@ module.exports = {
     'plugin:vue/recommended',
     'standard',
     'prettier',
-    'prettier/standard',
     'plugin:import/errors', // 配置eslint-plugin-import
     'plugin:import/warnings', // 配置eslint-plugin-import
     'plugin:node/recommended', // 配置eslint-plugin-node

@@ -5,7 +5,7 @@
    "description": "client",
    "author": "wangzl1163",
    "scripts": {
-      "build": "node build/build.js",
+      "build": "node build/build.js mod=production",
       "test": "npm run test:unit",
       "test:unit": "cross-env NODE_ENV=test jest"
    },

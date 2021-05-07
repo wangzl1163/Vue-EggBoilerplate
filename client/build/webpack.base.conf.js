@@ -4,6 +4,18 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const utils = require('./utils')
 const devMode = process.env.NODE_ENV !== 'production'
+const cssLoaders = devMode
+   ? [
+      'vue-style-loader',
+      'css-loader',
+      'less-loader'
+   ]
+   : [
+      MiniCssExtractPlugin.loader,
+      'css-loader',
+      'postcss-loader',
+      'less-loader'
+   ] 
 
 module.exports = {
    context: path.resolve(__dirname, '../'),
@@ -43,11 +55,7 @@ module.exports = {
          },
          {
             test: /\.(le|c)ss$/,
-            use: [
-               devMode ? 'vue-style-loader' : MiniCssExtractPlugin.loader,
-               'css-loader',
-               'less-loader'
-            ]
+            use: cssLoaders
          },
          {
             test: /\.(png|jpe?g|gif)(\?.*)?$/,
@@ -67,11 +75,7 @@ module.exports = {
          },
          {
             test: /\.(sass|scss)$/,
-            use: [
-               devMode ? 'vue-style-loader' : MiniCssExtractPlugin.loader,
-               'css-loader',
-               'sass-loader'
-            ]
+            use: cssLoaders
          },
          /* config.module.rule('icons') */
          {

@@ -96,12 +96,19 @@ export const constantRoutes = [
       level: 1,
       redirect: '/mysql/list',
       component: () => import('@/Components/Layout'),
+      meta: { title: 'MySQL' },
       children: [
          {
             path: 'list',
             component: () => import(/* webpackChunkName: "mysql" */ '@/Views/MySQL'),
             name: 'mysql',
-            meta: { title: 'MySQL', icon: 'dashboard', noCache: true }
+            meta: { title: 'MySQL', icon: 'dashboard', noCache: true, breadcrumb: true }
+         },
+         {
+            path: 'detail',
+            component: () => import(/* webpackChunkName: "mysql" */ '@/Views/MySQL/Detail'),
+            name: 'detail',
+            meta: { title: 'MySQL详情', icon: 'dashboard', noCache: true, breadcrumb: true }
          }
       ]
    },

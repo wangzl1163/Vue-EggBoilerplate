@@ -97,6 +97,13 @@ export default {
                      <div>
                         <el-button type="text" onClick={
                            () => {
+                              this.$router.push({
+                                 path: '/mysql/detail'
+                              })
+                           }
+                        }>详情</el-button>
+                        <el-button type="text" onClick={
+                           () => {
                               this.visible = true
                            }
                         }>编辑</el-button>

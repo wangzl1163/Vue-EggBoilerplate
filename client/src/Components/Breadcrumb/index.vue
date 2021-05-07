@@ -12,8 +12,6 @@
 </template>
 
 <script>
-import * as pathToRegexp from 'path-to-regexp'
-
 export default {
    data() {
       return {
@@ -51,23 +49,27 @@ export default {
          }
          return name.trim() === '首页'
       },
-      pathCompile(item) {
-         const { query, params, path } = item
-
-         if(query) {
-            return { path, query: query }
-         }
-
-         var toPath = pathToRegexp.compile(path)
-         return toPath(params || {})
-      },
       handleLink(item) {
-         const { redirect, path } = item
+         const { redirect, path, name, query, params } = item
          if (redirect) {
-            this.$router.push(redirect)
-            return
+            return this.$router.push(redirect)
          }
-         this.$router.push(this.pathCompile(item))
+
+         if (query) {
+            return this.$router.push({
+               path,
+               query
+            })
+         }
+
+         if (params) {
+            return this.$router.push({
+               name,
+               params
+            })
+         }
+         
+         this.$router.push(path)
       }
    }
 }

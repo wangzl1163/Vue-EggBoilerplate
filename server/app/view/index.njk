@@ -29,7 +29,7 @@
 
       {% if ctx.app.config.env !== "local" %}
          {% include "webpackBundle.script.html" %}
-         {% else%}
+      {% else%}
          <!--开发环境限定entry为app-->
          {% set stats = ctx
             .locals
@@ -38,7 +38,7 @@
          {% set appChunk = normalizeAssets(stats.entrypoints.app.assets) %}
          {% for item in appChunk%}
             <script src="{{stats.publicPath + item}}"></script>
-            {% endfor%}
-         {% endif %}
+         {% endfor%}
+      {% endif %}
       </body>
    </html>

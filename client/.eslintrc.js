@@ -11,7 +11,7 @@ module.exports = {
     'plugin:node/recommended', // 配置eslint-plugin-node
     'plugin:promise/recommended' // 配置eslint-plugin-promise
   ],
-  plugins: ['prettier', 'standard', 'promise', '@babel'],
+  plugins: ['standard', 'promise', '@babel'],
   rules: {
     'prettier/prettier': ['error', {"tabWidth": 3}],
     'vue/no-async-in-computed-properties': 'off',

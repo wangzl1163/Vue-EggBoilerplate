@@ -1,7 +1,7 @@
 'use strict'
 
 module.exports = {
-  write: true,
+  write: false,
   prefix: '^',
   devprefix: '^',
   plugin: 'autod-egg',
@@ -17,5 +17,5 @@ module.exports = {
     'eslint-config-egg',
     'webpack'
   ],
-  exclude: ['./test', './dist']
+  exclude: ['./test', './app/public']
 }

@@ -3,9 +3,10 @@
 module.exports = {
   write: true,
   prefix: '^',
+  devprefix: '^',
   plugin: 'autod-egg',
-  test: ['test', 'benchmark'],
-  dep: ['egg', 'egg-scripts'],
+  test: ['test'],
+  dep: ['egg', 'egg-scripts', 'egg-view-nunjucks'],
   devdep: [
     'egg-ci',
     'egg-bin',
@@ -14,7 +15,7 @@ module.exports = {
     'autod-egg',
     'eslint',
     'eslint-config-egg',
-    'webstorm-disable-index'
+    'webpack'
   ],
-  exclude: ['./test/fixtures', './dist']
+  exclude: ['./test', './dist']
 }

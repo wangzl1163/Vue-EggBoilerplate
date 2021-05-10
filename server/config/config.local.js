@@ -3,12 +3,15 @@ const webpackConfig = require('../../client/build/webpack.dev.conf')
 module.exports = () => {
   const config = {}
 
-  config.middleware = ['webpack']
-
   config.view = {
     cache: false
   }
 
+  // 配置开发模式需要的中间件，数组顺序即为中间件的加载顺序
+  config.middleware = ['webpack']
+
+  // 配置webpack中间件，见middleware文件夹下webpack.js
+  // 参数参考：https://github.com/shellscape/koa-webpack
   config.webpack = {
     enable: true,
     config: webpackConfig,

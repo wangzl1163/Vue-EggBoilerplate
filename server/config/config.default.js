@@ -4,16 +4,15 @@ const moment = require('moment')
 
 module.exports = appInfo => {
    const config = {}
-   
+
    // use for cookie sign key, should change to your own and keep security
    config.keys = `${appInfo.name}_1623503412105_8112`
 
-   config.webpackConfigAlias = {
-      keys: ['env']
-   }
-
+   // 模块渲染配置，参考：https://eggjs.org/zh-cn/core/view.html
    config.view = {
-      defaultViewEngine: 'nunjucks'
+      defaultViewEngine: 'nunjucks', // 配置后可以不配置mapping
+      // 一般在调用 render 时的第一个参数需要包含文件后缀，如果配置了 defaultExtension 可以省略后缀
+      defaultExtension: '.njk'
    }
 
    // 参数，参考：https://github.com/bripkens/connect-history-api-fallback
@@ -23,10 +22,29 @@ module.exports = appInfo => {
       verbose: true // 控制该插件日志记录
    }
 
+   // 对json和form格式数据进行解析，egg内置的解析器
+   // 参考：https://eggjs.org/zh-cn/basics/controller.html#body
+   //　　　 https://github.com/koajs/bodyparser
    config.bodyParser = {
-      enable: true,
       jsonLimit: '5mb',
       formLimit: '6mb'
+   }
+
+   // 获取上传的文件，multipart为内置插件
+   // 参考：https://eggjs.org/zh-cn/basics/plugin.html#%E6%8F%92%E4%BB%B6%E5%88%97%E8%A1%A8
+   //　　　 https://eggjs.org/zh-cn/basics/controller.html#%E8%8E%B7%E5%8F%96%E4%B8%8A%E4%BC%A0%E7%9A%84%E6%96%87%E4%BB%B6
+   //　　　 https://github.com/eggjs/egg-multipart
+   config.multipart = {
+      fileSize: '100mb', // default 50mb
+      mode: 'file', // 支持的文件类型  or  stream
+      tmpdir: path.join(os.tmpdir(), 'egg-multipart-tmp', appInfo.name),
+      cleanSchedule: {
+         // run tmpdir clean job on every day 04:30 am
+         // cron style see https://github.com/eggjs/egg-schedule#cron-style-scheduling
+         cron: '0 30 4 * * *',
+      },
+      // 覆盖整个egg支持的文件扩展名的白名单，当重写了 whitelist 时，fileExtensions 不生效。
+      whitelist: () => true // 不限制文件扩展名
    }
 
    // 日志配置，参考：https://eggjs.org/zh-cn/core/logger.html
@@ -78,21 +96,6 @@ module.exports = appInfo => {
          loginTokenKey: 'CTFO-AUTH-TOKEN',             // 登录账号
       }
 
-   }
-   
-   // 文件上传  see https://github.com/eggjs/egg-multipart
-   config.multipart = {
-      fileSize: '100mb', // default 50mb
-      mode: 'file', // 支持的文件类型  or  stream
-      tmpdir: path.join(os.tmpdir(), 'egg-multipart-tmp', appInfo.name),
-      cleanSchedule: {
-         // run tmpdir clean job on every day 04:30 am
-         // cron style see https://github.com/eggjs/egg-schedule#cron-style-scheduling
-         cron: '0 30 4 * * *',
-      },
-      whitelist: () => {
-         return true;// 不限制文件扩展名
-      }
    }
 
    // 设置资源文件

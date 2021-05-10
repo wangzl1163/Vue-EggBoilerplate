@@ -47,7 +47,8 @@ module.exports = appInfo => {
       whitelist: () => true // 不限制文件扩展名
    }
 
-   // 日志配置，参考：https://eggjs.org/zh-cn/core/logger.html
+   // 日志配置，日志分为 NONE，DEBUG，INFO，WARN 和 ERROR 5 个级别
+   // 参考：https://eggjs.org/zh-cn/core/logger.html
    config.logger = {
       dir: path.resolve(__dirname, `../logs/${appInfo.name}`), // 日志文件夹
       consoleLevel: 'DEBUG', // 输出到终端日志的级别

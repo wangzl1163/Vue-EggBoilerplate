@@ -18,6 +18,7 @@ module.exports = {
    rules: {
       'node/no-unsupported-features/es-syntax': 'off',
       'node/no-missing-import': 'off',
+      // 忽略webpack中设置的路径解析别名，以避免eslint无法识别而报错
       "import/no-unresolved": ['error', { "ignore": ["@/*"] }],
       'vue/no-async-in-computed-properties': 'off',
       'vue/max-attributes-per-line': 'off', // 关闭Vue，使用prettier自动根据行宽判断

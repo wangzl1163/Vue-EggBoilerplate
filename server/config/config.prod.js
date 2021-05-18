@@ -1,5 +1,9 @@
 module.exports = () => {
   const config = {}
+
+  // 日志切割器
+  // 参考：https://eggjs.org/zh-cn/core/logger.html#%E6%97%A5%E5%BF%97%E5%88%87%E5%89%B2
+  //　　　 https://github.com/eggjs/egg-logrotator
   config.logrotator = {
     maxDays: 7
   }

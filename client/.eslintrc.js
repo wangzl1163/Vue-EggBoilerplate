@@ -17,6 +17,8 @@ module.exports = {
    plugins: ['@babel'],
    rules: {
       'node/no-unsupported-features/es-syntax': 'off',
+      'node/no-missing-import': 'off',
+      "import/no-unresolved": [2, { "ignore": ["@/*"] }],
       'vue/no-async-in-computed-properties': 'off',
       'vue/max-attributes-per-line': 'off', // 关闭Vue，使用prettier自动根据行宽判断
       'vue/html-self-closing': [
@@ -34,14 +36,18 @@ module.exports = {
    env: {
       browser: true,
       node: true,
-      es6: true // 使eslint支持es6语法
+      es2021: true // 使eslint支持es6(2021年)语法
    },
    parser: 'vue-eslint-parser', // eslint-plugin-vue需要此配置，参考：https://eslint.vuejs.org/user-guide/#usage
    parserOptions: {
-      parser: '@babel/eslint-parser', // 配置使用@babel/eslint-parser，参考：https://eslint.vuejs.org/user-guide/#usage，其中的babel-eslint已经改为babel内置的@babel/eslint-parser
-      sourceType: "module",
-      ecmaVersion: 2020,
+      // 配置使用@babel/eslint-parser，参考：https://eslint.vuejs.org/user-guide/#usage，其中的babel-eslint已经改为babel内置的@babel/eslint-parser
+      parser: '@babel/eslint-parser',
+      // 不显式配置sourceType: "module"，会报错：'import' and 'export' may appear only with 'sourceType: "module"'
+      sourceType: 'module',
+      ecmaVersion: 2021,
       babelOptions: {
+         // 指定babel配置文件路径，解决了找不到babel配置文件问题
+         // 参考：https://www.npmjs.com/package/@babel/eslint-parser的“Additional parser configuration”节
          configFile: path.join(__dirname, '/babel.config.js')
       }
    }

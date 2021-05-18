@@ -1,5 +1,5 @@
+// 自定义helper方法
 module.exports = {
-
   clientTokenKey: 'token',// 客户端 header中带过来token的 key
   getToken(cookies, param) {
     if (!cookies) return ''

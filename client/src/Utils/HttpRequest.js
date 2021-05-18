@@ -7,7 +7,7 @@ let hideError = false
 
 // 创建axios实例
 const http = axios.create({
-   baseURL: process.env.VUE_APP_BASE_API, // api的base_url
+   baseURL: '/api/node', // api的base_url
    timeout: 60000, // 请求超时时间
    'x-csrf-token': getCookie('csrfToken')
 })
@@ -86,8 +86,9 @@ http.interceptors.response.use(response => {
 })
 
 function getCookie(name){
-   var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)");
-   if(arr=document.cookie.match(reg)) return unescape(arr[2]);
+   const reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)")
+   const arr = document.cookie.match(reg)
+   if(arr) return unescape(arr[2]);
    else return null;
 }
 

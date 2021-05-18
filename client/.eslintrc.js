@@ -18,7 +18,7 @@ module.exports = {
    rules: {
       'node/no-unsupported-features/es-syntax': 'off',
       'node/no-missing-import': 'off',
-      "import/no-unresolved": [2, { "ignore": ["@/*"] }],
+      "import/no-unresolved": ['error', { "ignore": ["@/*"] }],
       'vue/no-async-in-computed-properties': 'off',
       'vue/max-attributes-per-line': 'off', // 关闭Vue，使用prettier自动根据行宽判断
       'vue/html-self-closing': [

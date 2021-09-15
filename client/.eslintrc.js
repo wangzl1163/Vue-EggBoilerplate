@@ -48,7 +48,7 @@ module.exports = {
       ecmaVersion: 2021,
       babelOptions: {
          // 指定babel配置文件路径，解决了找不到babel配置文件问题
-         // 参考：https://www.npmjs.com/package/@babel/eslint-parser的“Additional parser configuration”节
+         // 参考：https://www.npmjs.com/package/@babel/eslint-parser 的“Additional parser configuration”节
          configFile: path.join(__dirname, '/babel.config.js')
       }
    }

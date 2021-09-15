@@ -8,7 +8,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 
-let otherPlugins = []
+const otherPlugins = []
 
 const webpackConfig = merge(baseWebpackConfig, {
    mode: 'production',
@@ -58,7 +58,7 @@ const webpackConfig = merge(baseWebpackConfig, {
    }
 })
 
-if (process.env.npm_config_report) {
+if (process.env.analyzer === 'yes') {
    const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
    webpackConfig.plugins.push(new BundleAnalyzerPlugin())
 }

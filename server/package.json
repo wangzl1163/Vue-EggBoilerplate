@@ -9,7 +9,7 @@
   },
   "author": "wangzl1163",
   "scripts": {
-    "autod": "autod",
+    "autod": "autod -P autod-egg",
     "cov": "egg-bin cov",
     "debug": "egg-bin debug --works=1",
     "dev": "egg-bin dev --port=9001",
@@ -23,7 +23,8 @@
     "egg-http-proxy": "^1.0.1",
     "egg-logrotator": "^3.1.0",
     "egg-scripts": "^2.13.0",
-    "egg-view-nunjucks": "^2.3.0"
+    "egg-view-nunjucks": "^2.3.0",
+    "moment": "^2.29.1"
   },
   "devDependencies": {
     "acorn": "^6.4.2",
@@ -33,7 +34,6 @@
     "egg-mock": "^4.1.0",
     "koa-webpack": "^6.0.0",
     "mocha": "^5.2.0",
-    "moment": "^2.29.1",
     "webpack": "^4.46.0"
   },
   "engines": {

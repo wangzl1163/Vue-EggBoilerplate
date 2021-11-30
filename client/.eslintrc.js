@@ -16,6 +16,7 @@ module.exports = {
    ],
    plugins: ['@babel'],
    rules: {
+      'node/no-unpublished-require': 'off',
       'node/no-unsupported-features/es-syntax': 'off',
       'node/no-missing-import': 'off',
       // 忽略webpack中设置的路径解析别名，以避免eslint无法识别而报错

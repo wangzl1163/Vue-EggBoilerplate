@@ -3,6 +3,8 @@ const path = require('path')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const utils = require('./utils')
+
+const target = require("./targetOptions")[process.env.target];
 const devMode = process.env.NODE_ENV !== 'production'
 const cssLoaders = devMode
    ? [
@@ -11,30 +13,34 @@ const cssLoaders = devMode
       'less-loader'
    ]
    : [
-      MiniCssExtractPlugin.loader,
+      {
+         loader: MiniCssExtractPlugin.loader,
+         options: {
+            // less中使用了export需要置为false，否则export编译不通过
+            esModule: false
+         }
+      },
       'css-loader',
       'postcss-loader',
       'less-loader'
    ] 
 
 module.exports = {
-   context: path.resolve(__dirname, '../'),
+   context: utils.resolvePath("../"),
    entry: {
       app: ['./src/main.js']
    },
    output: {
-      path: path.resolve(__dirname, '../../server/app/public'),
+      path: target.outputPath,
       filename: '[name].js',
       chunkFilename: '[name].chunk.js',
-      publicPath: '/public/'
+      publicPath: target.publicPath
    },
-   externals: {
-      vue: 'Vue',
-      'vue-router': 'VueRouter'
-   },
+   externals: target.externals,
    resolve: {
       extensions: ['.js', '.vue', '.json'],
       alias: {
+         "@static": path.resolve(__dirname, "../static"),
          '@views': path.resolve(__dirname, '../src/views'),
          '@': path.resolve(__dirname, '../src')
       }
@@ -50,7 +56,8 @@ module.exports = {
             loader: 'babel-loader',
             exclude: /node_modules/,
             options: {
-               cwd: path.resolve(__dirname, '../')
+               cwd: path.resolve(__dirname, '../'),
+               cacheDirectory: true // babel转译缓存，提升编译性能
             }
          },
          {
@@ -89,12 +96,19 @@ module.exports = {
                   }
                }
             ]
+         },
+         // 使用element-plus时需要此配置
+         {
+            test: /\.mjs$/,
+            include: /node_modules/,
+            type: "javascript/auto"
          }
       ]
    },
    plugins: [
       new VueLoaderPlugin(),
       new MiniCssExtractPlugin({
+         ignoreOrder: true,
          filename: utils.assetsPath('css/' + (devMode ? '[name].css' : '[name].[contenthash].css')),
          chunkFilename: utils.assetsPath(
             'css/' + (devMode ? '[id].css' : '[name].[id].[contenthash].css')

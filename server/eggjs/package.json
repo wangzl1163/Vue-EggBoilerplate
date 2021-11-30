@@ -1,0 +1,45 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "private": true,
+  "description": "http proxy server",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "author": "wangzl1163",
+  "scripts": {
+    "autod": "autod -P autod-egg",
+    "cov": "egg-bin cov",
+    "debug": "set target=egg&egg-bin debug --works=1",
+    "dev": "set target=egg&egg-bin dev",
+    "start": "eggctl start --title=egg-server-http-proxy",
+    "start:test": "eggctl start --title=egg-server-http-proxy --workers=2 --env=test",
+    "stop": "eggctl stop --title=egg-server-http-proxy",
+    "test": "egg-bin test"
+  },
+  "dependencies": {
+    "egg": "^2.32.0",
+    "egg-history-api-fallback": "^2.0.1",
+    "egg-http-proxy": "^1.0.1",
+    "egg-scripts": "^2.13.0",
+    "egg-view-nunjucks": "^2.3.0"
+  },
+  "devDependencies": {
+    "autod": "^3.1.1",
+    "autod-egg": "^1.1.0",
+    "egg-bin": "^4.16.4",
+    "egg-mock": "^4.1.0",
+    "eslint": "^8.3.0",
+    "eslint-config-egg": "^10.0.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "koa-webpack": "^6.0.0",
+    "mocha": "^5.2.0",
+    "prettier": "^2.5.0",
+    "webpack": "^4.46.0"
+  },
+  "engines": {
+    "node": ">=8.10.0"
+  }
+}

@@ -3,13 +3,14 @@
    "scripts": {
       "install-all": "npm install && npm-run-all install:*",
       "install:client": "cd client && npm install",
-      "install:server": "cd server && npm install",
-      "dev": "cd server && npm run dev",
-      "build": "cd client && npm run build",
-      "start": "npm-run-all start:*",
+      "install:egg": "cd server/eggjs && npm install",
+      "dev:egg": "cd server/eggjs && npm run dev",
+      "build:egg": "cd client && npm run build:egg",
+      "build:nginx": "cd client && npm run build:nginx",
       "start:client": "cd client && npm run build",
-      "start:server": "cd server && npm run start",
-      "stop": "cd server && npm run stop",
+      "start:egg": "cd server/eggjs && npm start",
+      "start:egg:test": "cd server/eggjs && npm run start:test",
+      "stop:egg": "cd server/eggjs && npm run stop",
       "pre-commit": "lint-staged"
    },
    "devDependencies": {
@@ -20,6 +21,9 @@
    "lint-staged": {
       "client/src/**": [
          "./client/node_modules/eslint/bin/eslint.js --fix"
+      ],
+      "server/eggjs/**": [
+         "./server/eggjs/node_modules/eslint/bin/eslint.js --fix"
       ]
    },
    "engines": {

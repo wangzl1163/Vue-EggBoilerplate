@@ -1,0 +1,12 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "npm",
+			"script": "dev:egg",
+			"problemMatcher": [],
+			"label": "npm:dev",
+			"detail": "运行开发环境"
+		}
+	]
+}

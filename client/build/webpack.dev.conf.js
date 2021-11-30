@@ -15,7 +15,6 @@ const devWebpackConfig = merge(baseWebpackConfig, {
          patterns: [
             {
                from: path.resolve(__dirname, '../public'),
-               to: 'static',
                globOptions: {
                   ignore: ['.*']
                }

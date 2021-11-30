@@ -1,5 +1,5 @@
 'use strict'
-const path = require('path')
+
 const utils = require('./utils')
 const webpack = require('webpack')
 const { merge } = require('webpack-merge')
@@ -7,6 +7,9 @@ const baseWebpackConfig = require('./webpack.base.conf')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
+const CompressionWebpackPlugin = require("compression-webpack-plugin");
+
+const target = require("./targetOptions")[process.env.target];
 
 const otherPlugins = []
 
@@ -19,9 +22,7 @@ const webpackConfig = merge(baseWebpackConfig, {
    },
    plugins: [
       new HtmlWebpackPlugin({
-         title: '', // html文档中的title
-         // 使用path.resolve，因为插件无法解析相对路径
-         filename: path.resolve(__dirname, '../dist/webpackBundle.html'),
+         ...target.htmlWebpackPlugin,
          minify: {
             removeComments: true, // 移除注释
             collapseWhitespace: true, // 消除空白空间/空格
@@ -37,16 +38,11 @@ const webpackConfig = merge(baseWebpackConfig, {
       new webpack.HashedModuleIdsPlugin({
          hashDigestLength: 20
       }),
-      new CopyWebpackPlugin({
-         patterns: [
-            {
-               from: path.resolve(__dirname, '../public'), // 文件夹不能为空，否则会报错
-               to: 'static',
-               globOptions: {
-                  ignore: ['.*']
-               }
-            }
-         ]
+      new CopyWebpackPlugin(target.copyWebpackPlugin),
+      new CompressionWebpackPlugin({
+         cache: true,
+         threshold: 10 * 1024, // 超过10KB则被压缩
+         exclude: [/node_modules/]
       })
    ].concat(otherPlugins),
    optimization: {
@@ -58,7 +54,7 @@ const webpackConfig = merge(baseWebpackConfig, {
    }
 })
 
-if (process.env.analyzer === 'yes') {
+if (process.env.analyzer === 'true') {
    const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
    webpackConfig.plugins.push(new BundleAnalyzerPlugin())
 }

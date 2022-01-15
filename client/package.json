@@ -81,7 +81,7 @@
       "rimraf": "^3.0.2",
       "scriptjs": "^2.5.9",
       "semver": "^7.3.2",
-      "shelljs": "^0.8.3",
+      "shelljs": "^0.8.5",
       "standard": "^16.0.3",
       "svg-sprite-loader": "^5.2.1",
       "url-loader": "^4.1.1",
